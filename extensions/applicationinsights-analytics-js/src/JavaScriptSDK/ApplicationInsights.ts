@@ -576,7 +576,7 @@ export class ApplicationInsights extends BaseTelemetryPlugin implements IAppInsi
                 const handled = originalOnError && (originalOnError(message, url, lineNumber, columnNumber, error) as any);
                 if (handled !== true) { // handled could be typeof function
                     instance._onerror({
-                        message,
+                        message: CoreUtils.isString(message) ? message as string : (message ? message.toString() : null),
                         url,
                         lineNumber,
                         columnNumber,
